@@ -51,7 +51,8 @@ class VisualizationDemo(object):
             vis_output (VisImage): the visualized image output.
         """
         vis_output = None
-        predictions = self.predictor(image)
+        predictions = self.predictor(image)#predictions是一个字典，它的键是instances、sem_seg、panoptic_seg，它的值是一个tensor
+        #tensor是一个多维数组，它的数据类型是torch.Tensor，它的值是在0到1之间的浮点数
         # Convert image from OpenCV BGR format to Matplotlib RGB format.
         image = image[:, :, ::-1]
         use_video_vis = True

@@ -116,7 +116,7 @@ if __name__ == "__main__":
             predictions, visualized_output = demo.run_on_image(
                 img, visualizer=visualizer)
             # run_on_image()是VisualizationDemo类中的一个函数，用于预测图片
-            # img是图片，visualizer是一个VideoVisualizer类的对象，在上文中定义过
+            # img是原始图片，visualizer是一个VideoVisualizer类的对象，在上文中定义过
             # 返回的是predictions(ditc)和vis_output(VisImage)
             if 'instances' in predictions: #如果predictions中有instances，prediction是一个字典，里面包含了instances以及proposals以及其他的信息
                 logger.info(
