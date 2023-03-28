@@ -1,4 +1,4 @@
-#Indoor object detection based on multi-scale feature fusion and attention mechanism
+# Indoor object detection based on multi-scale feature fusion and attention mechanism
 
 基于centernet补充添加注意力机制和FPN
 
