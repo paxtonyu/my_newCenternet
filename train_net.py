@@ -38,6 +38,8 @@ from detectron2.data.build import build_detection_train_loader
 from centernet.config import add_centernet_config
 from centernet.data.custom_build_augmentation import build_custom_augmentation
 
+from my_coco_register import register_my_coco # 我加的
+
 logger = logging.getLogger("detectron2")
 
 def do_test(cfg, model):
@@ -187,7 +189,7 @@ def setup(args):
 
 def main(args):
     cfg = setup(args)
-
+    register_my_coco()  #注册我的数据集
     model = build_model(cfg)
     logger.info("Model:\n{}".format(model))
     if args.eval_only:
