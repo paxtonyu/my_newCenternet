@@ -4,7 +4,7 @@ MODEL:
     NAME: "CenterNet"
   BACKBONE:
     NAME: "build_p67_resnet_fpn_backbone"
-  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  #WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
   RESNETS:
     DEPTH: 50
     OUT_FEATURES: ["res3", "res4", "res5"]

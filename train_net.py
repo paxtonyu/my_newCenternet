@@ -38,7 +38,7 @@ from detectron2.data.build import build_detection_train_loader
 from centernet.config import add_centernet_config
 from centernet.data.custom_build_augmentation import build_custom_augmentation
 
-from my_coco_register import register_my_coco # 我加的
+from mytools.my_coco_register import register_my_coco # 我加的
 
 logger = logging.getLogger("detectron2")
 
