@@ -19,14 +19,14 @@ MODEL:
     IN_FEATURES: ['p3', 'p4', 'p5']
     SOI: [[0, 64], [48, 192], [128, 1000000]]
 DATASETS:
-  TRAIN: ("coco_2017_train",)
-  TEST: ("coco_2017_val",)
+  TRAIN: ("my_indoor_dataset_train",)
+  TEST: ("my_indoor_dataset_val",)
 SOLVER:
-  IMS_PER_BATCH: 16
+  IMS_PER_BATCH: 2
   BASE_LR: 0.02
   STEPS: (300000, 340000)
   MAX_ITER: 360000
-  CHECKPOINT_PERIOD: 100000
+  CHECKPOINT_PERIOD: 50000
   WARMUP_ITERS: 4000
   WARMUP_FACTOR: 0.00025
 INPUT:

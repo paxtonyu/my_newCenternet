@@ -39,10 +39,15 @@ from centernet.config import add_centernet_config
 from centernet.data.custom_build_augmentation import build_custom_augmentation
 
 from mytools.my_coco_register import register_my_coco # 我加的
+import time
 
 logger = logging.getLogger("detectron2")
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'        # 如果出现问题，CUDA debug模式，可以帮助我们找到问题所在，报错更详细
+
 def do_test(cfg, model):
+    time.sleep(1)
     results = OrderedDict() # OrderedDict()是一个有序的词典，Python里的函数
     #进行数据集的转化
     for dataset_name in cfg.DATASETS.TEST:
