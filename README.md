@@ -5,6 +5,9 @@
 ## 使用nohup
 `nohup python ./train_net.py >> ./mylog/train.log 2>&1 &`
 
+## 使用tensorboard
+`tensorboard --logdir=./output/MY/folderpath --port=6006`
+
 ## Probabilistic two-stage detection
 Two-stage object detectors that use class-agnostic one-stage detectors as the proposal network.
 
