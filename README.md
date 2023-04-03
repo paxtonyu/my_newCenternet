@@ -2,6 +2,9 @@
 
 基于centernet补充添加注意力机制和FPN
 
+## 使用nohup
+`nohup python ./train_net.py >> ./mylog/train.log 2>&1 &`
+
 ## Probabilistic two-stage detection
 Two-stage object detectors that use class-agnostic one-stage detectors as the proposal network.
 

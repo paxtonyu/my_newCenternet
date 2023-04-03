@@ -6,6 +6,8 @@ from torch.nn.parallel import DistributedDataParallel
 import time
 import datetime
 import json
+import argparse
+import sys
 
 from fvcore.common.timer import Timer
 import detectron2.utils.comm as comm
@@ -43,11 +45,26 @@ import time
 
 logger = logging.getLogger("detectron2")
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
+#os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'        # 如果出现问题，CUDA debug模式，可以帮助我们找到问题所在，报错更详细
 
+def default_argument_parser_my(epilog=None):
+    port = 2**15 + 2**14 + hash(os.getuid() if sys.platform != "win32" else 1) % 2**14
+    parser = argparse.ArgumentParser(
+        epilog=epilog,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument( "--config-file", default="./configs/my_train_CenterNet2_DLA-BiFPN-P3_24x.yaml", metavar="FILE", help="path to config file")
+    parser.add_argument("--resume",action="store_true", help="Whether to attempt to resume from the checkpoint directory. ")
+    parser.add_argument("--eval-only", action="store_true", help="perform evaluation only")
+    parser.add_argument("--num-gpus", type=int, default=1, help="number of gpus *per machine*")
+    parser.add_argument("--num-machines", type=int, default=1, help="total number of machines")
+    parser.add_argument("--machine-rank", type=int, default=0, help="the rank of this machine (unique per machine)")
+    parser.add_argument( "--dist-url",default="tcp://127.0.0.1:{}".format(port), help="initialization URL for pytorch distributed backend. See https://pytorch.org/docs/stable/distributed.html for details.")
+    parser.add_argument("opts",default=None,nargs=argparse.REMAINDER)
+    return parser
+
 def do_test(cfg, model):
-    time.sleep(1)
     results = OrderedDict() # OrderedDict()是一个有序的词典，Python里的函数
     #进行数据集的转化
     for dataset_name in cfg.DATASETS.TEST:
@@ -219,7 +236,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    args = default_argument_parser()
+    args = default_argument_parser_my()     #不改会调用detectron里的
     args.add_argument('--manual_device', default='')
     args = args.parse_args()
     if args.manual_device != '':

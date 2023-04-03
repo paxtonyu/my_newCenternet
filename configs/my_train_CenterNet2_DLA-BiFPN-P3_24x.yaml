@@ -1,5 +1,6 @@
 _BASE_: "Base-CenterNet2.yaml"
 MODEL:
+  WEIGHTS: "./models/CenterNet2/CenterNet2_DLA-BiFPN-P3_24x.pth"
   BACKBONE:
     NAME: "build_p35_fcos_dla_bifpn_backbone"
   BIFPN:
@@ -13,24 +14,30 @@ MODEL:
     IN_FEATURES: ["dla3", "dla4", "dla5"]
   ROI_HEADS:
     IN_FEATURES: ["p3", "p4", "p5"]
+    NUM_CLASSES: 80
   CENTERNET:
     POST_NMS_TOPK_TEST: 128
     FPN_STRIDES: [8, 16, 32]
     IN_FEATURES: ['p3', 'p4', 'p5']
     SOI: [[0, 64], [48, 192], [128, 1000000]]
+    NUM_CLASSES: 80
 DATASETS:
   TRAIN: ("my_indoor_dataset_train",)
   TEST: ("my_indoor_dataset_val",)
 SOLVER:
-  IMS_PER_BATCH: 2
-  BASE_LR: 0.02
-  STEPS: (300000, 340000)
-  MAX_ITER: 360000
-  CHECKPOINT_PERIOD: 50000
+  IMS_PER_BATCH: 8
+  BASE_LR: 0.005
+  STEPS: (80000, 100000)
+  MAX_ITER: 120000
+  CHECKPOINT_PERIOD: 20000
   WARMUP_ITERS: 4000
   WARMUP_FACTOR: 0.00025
+  RESET_ITER: TRUE
+TEST:
+  EVAL_PERIOD: 20000
 INPUT:
   MIN_SIZE_TRAIN: (256, 288, 320, 352, 384, 416, 448, 480, 512, 544, 576, 608)
   MAX_SIZE_TRAIN: 900
   MAX_SIZE_TEST: 736
   MIN_SIZE_TEST: 512
+OUTPUT_DIR: "./output/MY/auto"
