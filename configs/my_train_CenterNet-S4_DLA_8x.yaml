@@ -1,0 +1,16 @@
+_BASE_: "Base_S4_DLA.yaml"
+MODEL:
+  WEIGHTS: "./models/CenterNet2/CenterNet-S4_DLA_8x.pth"
+DATASETS:
+  TRAIN: ("my_indoor_dataset_train",)
+  TEST: ("my_indoor_dataset_val",)
+SOLVER:
+  MAX_ITER: 150000
+  BASE_LR: 0.003
+  STEPS: (120000, 140000)
+  CHECKPOINT_PERIOD: 50000
+  RESET_ITER: TRUE
+  IMS_PER_BATCH: 8
+TEST:
+  EVAL_PERIOD: 10000
+OUTPUT_DIR: "./output/MY/auto"
