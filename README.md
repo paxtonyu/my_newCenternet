@@ -93,6 +93,7 @@ python demo.py --config-file configs/CenterNet2_R50_1x.yaml --input path/to/imag
 
 Please check detectron2 [GETTING_STARTED.md](https://github.com/facebookresearch/detectron2/blob/master/GETTING_STARTED.md) for running evaluation and training. Our config files are under `configs` and the pre-trained models are in the [MODEL_ZOO](docs/MODEL_ZOO.md).
 
+`git config --local https.proxy 'http://10.1.77.225:8080'`
 
 ## License
 
