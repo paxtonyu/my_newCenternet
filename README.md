@@ -1,6 +1,6 @@
 # Indoor object detection based on multi-scale feature fusion and attention mechanism
 
-基于centernet补充添加注意力机制和FPN
+基于centernet补充添加Attention和DLA
 
 ## Eval on my indoor dataset val
 >CenterNet-S4_DLA_8x
