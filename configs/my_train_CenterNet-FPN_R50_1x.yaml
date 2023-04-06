@@ -1,5 +1,6 @@
 _BASE_: "Base-CenterNet-FPN.yaml"
-CENTERNET:
+MODEL:
+  CENTERNET:
     MORE_POS: True
   WEIGHTS: "./models/CenterNet/CenterNet-FPN_R50_1x.pth"
 DATASETS:

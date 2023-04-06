@@ -54,7 +54,7 @@ def default_argument_parser_my(epilog=None):
         epilog=epilog,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument( "--config-file", default="./configs/my_train_CenterNet-S4_DLA_8x.yaml", metavar="FILE", help="path to config file")
+    parser.add_argument( "--config-file", default="./configs/my_train_CenterNet-FPN_R50_1x.yaml", metavar="FILE", help="path to config file")
     parser.add_argument("--resume",action="store_true", help="Whether to attempt to resume from the checkpoint directory. ")
     parser.add_argument("--eval-only", action="store_true", help="perform evaluation only")
     parser.add_argument("--num-gpus", type=int, default=1, help="number of gpus *per machine*")
