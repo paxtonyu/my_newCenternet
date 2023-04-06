@@ -1,16 +1,18 @@
-_BASE_: "Base_S4_DLA.yaml"
-MODEL:
-  WEIGHTS: "./models/CenterNet/CenterNet-S4_DLA_8x.pth"
+_BASE_: "Base-CenterNet-FPN.yaml"
+CENTERNET:
+    MORE_POS: True
+  WEIGHTS: "./models/CenterNet/CenterNet-FPN_R50_1x.pth"
 DATASETS:
   TRAIN: ("my_indoor_dataset_train",)
   TEST: ("my_indoor_dataset_val",)
 SOLVER:
-  LR_SCHEDULER_NAME: "WarmupCosineLR"
-  MAX_ITER: 80000
-  BASE_LR: 0.01
   IMS_PER_BATCH: 16
-  WEIGHT_DECAY: 0.00005
+  BASE_LR: 0.01
+  STEPS: (65000, 72000)
+  MAX_ITER: 80000
   CHECKPOINT_PERIOD: 41000
+  WARMUP_ITERS: 4000
+  WARMUP_FACTOR: 0.00015
   CLIP_GRADIENTS:
     ENABLED: True
 TEST:
