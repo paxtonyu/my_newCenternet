@@ -24,7 +24,7 @@ def split_name(name):
     raise ValueError()
 
 
-class FeatureMapResampler(nn.Module):
+class FeatureMapResampler(nn.Module):   #特种图重新采样
     def __init__(self, in_channels, out_channels, stride, norm=""):
         super(FeatureMapResampler, self).__init__()
         if in_channels != out_channels:
@@ -56,7 +56,7 @@ class FeatureMapResampler(nn.Module):
         return x
 
 
-class BackboneWithTopLevels(Backbone):
+class BackboneWithTopLevels(Backbone):  #该类的作用是在backbone的基础上添加额外的层
     def __init__(self, backbone, out_channels, num_top_levels, norm=""):
         super(BackboneWithTopLevels, self).__init__()
         self.backbone = backbone
@@ -100,10 +100,11 @@ class BackboneWithTopLevels(Backbone):
         return outputs
 
 
-class SingleBiFPN(Backbone):
+class SingleBiFPN_with_Attention(Backbone): #添加了attention的bifpn
     """
     This module implements Feature Pyramid Network.
     It creates pyramid features built on top of some input feature maps.
+    Then apply attention to the features.
     """
 
     def __init__(
@@ -122,22 +123,22 @@ class SingleBiFPN(Backbone):
             out_channels (int): number of channels in the output feature maps.
             norm (str): the normalization to use.
         """
-        super(SingleBiFPN, self).__init__()
+        super(SingleBiFPN_with_Attention, self).__init__()  #初始化父类
 
-        self.out_channels = out_channels
+        self.out_channels = out_channels    #输出通道数
         # build 5-levels bifpn
-        if len(in_channels_list) == 5:
-            self.nodes = [
-                {'feat_level': 3, 'inputs_offsets': [3, 4]},
-                {'feat_level': 2, 'inputs_offsets': [2, 5]},
-                {'feat_level': 1, 'inputs_offsets': [1, 6]},
-                {'feat_level': 0, 'inputs_offsets': [0, 7]},
+        if len(in_channels_list) == 5:  #如果输入通道数为5，那么就是5层的bifpn
+            self.nodes = [  #定义每一层的结构
+                {'feat_level': 3, 'inputs_offsets': [3, 4]},    #feat_level是BiFPN节点的层号，从下到上为0-4
+                {'feat_level': 2, 'inputs_offsets': [2, 5]},    #inputs_offsets 输入偏移
+                {'feat_level': 1, 'inputs_offsets': [1, 6]},    #此处记录的是输入的特征图的索引
+                {'feat_level': 0, 'inputs_offsets': [0, 7]},    #节点编号详见README
                 {'feat_level': 1, 'inputs_offsets': [1, 7, 8]},
                 {'feat_level': 2, 'inputs_offsets': [2, 6, 9]},
                 {'feat_level': 3, 'inputs_offsets': [3, 5, 10]},
                 {'feat_level': 4, 'inputs_offsets': [4, 11]},
             ]
-        elif len(in_channels_list) == 3:
+        elif len(in_channels_list) == 3:    #如果输入通道数为3，那么就是3层的bifpn
             self.nodes = [
                 {'feat_level': 1, 'inputs_offsets': [1, 2]},
                 {'feat_level': 0, 'inputs_offsets': [0, 3]},
@@ -151,8 +152,8 @@ class SingleBiFPN(Backbone):
 
         num_output_connections = [0 for _ in in_channels_list]
         for fnode in self.nodes:
-            feat_level = fnode["feat_level"]
-            inputs_offsets = fnode["inputs_offsets"]
+            feat_level = fnode["feat_level"]    #
+            inputs_offsets = fnode["inputs_offsets"]    #某个节点输入的连线数目
             inputs_offsets_str = "_".join(map(str, inputs_offsets))
             for input_offset in inputs_offsets:
                 num_output_connections[input_offset] += 1
