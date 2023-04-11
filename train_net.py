@@ -45,7 +45,7 @@ import time
 
 logger = logging.getLogger("detectron2")
 
-#os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
+# os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'        # 如果出现问题，CUDA debug模式，可以帮助我们找到问题所在，报错更详细
 
 def default_argument_parser_my(epilog=None):
@@ -54,7 +54,7 @@ def default_argument_parser_my(epilog=None):
         epilog=epilog,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument( "--config-file", default="./configs/my_CenterNet-DLA-BiFPN-P3.yaml", metavar="FILE", help="path to config file")
+    parser.add_argument( "--config-file", default="", metavar="FILE", help="path to config file")
     parser.add_argument("--resume",action="store_true", help="Whether to attempt to resume from the checkpoint directory. ")
     parser.add_argument("--eval-only", action="store_true", help="perform evaluation only")
     parser.add_argument("--num-gpus", type=int, default=1, help="number of gpus *per machine*")

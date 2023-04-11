@@ -1,5 +1,7 @@
 MODEL:
   META_ARCHITECTURE: "CenterNetDetector"
+  CENTERNET:
+    MORE_POS: True
   PROPOSAL_GENERATOR:
     NAME: "CenterNet"
   BACKBONE:
