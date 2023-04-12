@@ -9,6 +9,8 @@ from .modeling.backbone.bifpn import build_resnet_bifpn_backbone
 from .modeling.backbone.bifpn_fcos import build_fcos_resnet_bifpn_backbone
 from .modeling.backbone.res2net import build_p67_res2net_fpn_backbone
 
+from .modeling.backbone.my_dla_bifpn_cbam import my_build_p35_dla_bifpn_cbam_backbone
+
 from .data.datasets.objects365 import categories_v1
 from .data.datasets.coco import _PREDEFINED_SPLITS_COCO
 from .data.datasets import nuimages
