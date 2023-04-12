@@ -4,10 +4,10 @@ MODEL:
     NAME: "CenterNet"
   PIXEL_STD: [57.375, 57.120, 58.395]
   BACKBONE:
-    NAME: "my_build_p37_dla_bifpn_cbam_backbone"
+    NAME: "my_build_p35_dla_bifpn_cbam_backbone"
   BIFPN:
     OUT_CHANNELS: 160
-    NUM_LEVELS: 5
+    NUM_LEVELS: 3
     NUM_BIFPN: 3
   DLA:
     NUM_LAYERS: 34
@@ -22,7 +22,6 @@ MODEL:
     NUM_BOX_CONVS: 1
     REG_WEIGHT: 1.
     MORE_POS: True
-    HM_FOCAL_ALPHA: 0.25
   WEIGHTS: "./models/ImageNetPretrained/MSRA_R-50.pkl"
 DATASETS:
   TRAIN: ("coco_2017_train",)
@@ -46,4 +45,4 @@ TEST:
   EVAL_PERIOD: 5000
 DATALOADER:
   NUM_WORKERS: 8
-OUTPUT_DIR: "./output/MY/CBAM/auto"
+OUTPUT_DIR: "./output/MY/auto"
