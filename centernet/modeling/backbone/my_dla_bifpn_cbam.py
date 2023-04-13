@@ -378,7 +378,7 @@ class BiFPN_with_CBAM(Backbone):    #添加CBAM的BiFPN骨干网络
             if i == 0:  #第一次BiFPN
                 in_channels_list = [
                     bottom_up_output_shapes[name].channels for name in in_features
-                ]   #第一次BiFPN的输入为bottom_up的输出，比如我使用的dla34，bottom_up的输出为[256, 512, 1024, 2048]
+                ]   #第一次BiFPN的输入为bottom_up的输出，比如我使用的dla34的通道[16, 32, 64, 128, 256, 512]
             else:
                 in_channels_list = [
                     self._out_feature_channels[name] for name in self._out_features
