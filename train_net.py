@@ -46,7 +46,7 @@ import time
 logger = logging.getLogger("detectron2")
 
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
-os.environ['CUDA_LAUNCH_BLOCKING'] = '1'        # 如果出现问题，CUDA debug模式，可以帮助我们找到问题所在，报错更详细
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'        # 如果出现问题，CUDA debug模式，可以帮助找到问题所在，报错更详细
 
 def default_argument_parser_my(epilog=None):
     port = 2**15 + 2**14 + hash(os.getuid() if sys.platform != "win32" else 1) % 2**14
