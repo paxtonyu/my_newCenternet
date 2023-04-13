@@ -24,7 +24,7 @@ def split_name(name):
     raise ValueError()
 
 
-class FeatureMapResampler(nn.Module):   #特种图重新采样
+class FeatureMapResampler(nn.Module):   #特征图重新采样
     def __init__(self, in_channels, out_channels, stride, norm=""):
         super(FeatureMapResampler, self).__init__()
         if in_channels != out_channels:
