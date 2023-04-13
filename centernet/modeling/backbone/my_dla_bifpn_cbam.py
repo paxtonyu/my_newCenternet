@@ -311,7 +311,7 @@ class CBAM(nn.Module):
 
     def forward(self, features):    #前向传播
         out_feature=[]
-        for x in enumerate(features):
+        for idx , x in enumerate(features): #enumerate()函数返回的是一个元组，元组的第一个元素是索引，第二个元素是元素本身
             x = self.ca(x) * x  #  执行通道注意力机制，并为通道赋予权重
             x = self.sa(x) * x  #  执行空间注意力机制，并为通道赋予权重
             out_feature.append(x)
@@ -340,7 +340,7 @@ class BiFPN_with_CBAM(Backbone):    #添加CBAM的BiFPN骨干网络
                 of these may be used; order must be from high to low resolution.
             out_channels (int): number of channels in the output feature maps.
             num_top_levels (int): the number of the top levels (p6 or p7).
-            num_repeats (int): the number of repeats of BiFPN.
+            num_repeats (int): the number of repeats of BiFPN with CBAM.
             norm (str): the normalization to use.
         """
         super(BiFPN_with_CBAM, self).__init__()
