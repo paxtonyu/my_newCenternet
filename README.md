@@ -8,6 +8,11 @@
 ## 使用tensorboard
 `tensorboard --logdir=./output/MY/folderpath --port=6006`
 
+## git push失败
+
+报错 `gnutls_handshake() failed: The TLS connection was non-properly terminated.`
+使用 `git config --global http.sslverify false`
+
 ## Probabilistic two-stage detection
 Two-stage object detectors that use class-agnostic one-stage detectors as the proposal network.
 
