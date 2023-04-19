@@ -3,7 +3,7 @@
 基于centernet补充添加Attention和MSF
 
 ## 使用nohup
-`nohup python ./train_net.py >> ./mylog/train.log 2>&1 &`
+`nohup python ./train_net.py --confige-file ./configs/xxx.yaml >> ./mylog/xxx.log 2>&1 &`
 
 ## 使用tensorboard
 `tensorboard --logdir=./output/MY/folderpath --port=6006`
