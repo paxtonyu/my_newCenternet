@@ -24,7 +24,6 @@ MODEL:
     REG_WEIGHT: 1.
     MORE_POS: True
     HM_FOCAL_ALPHA: 0.25
-
   WEIGHTS: "./models/ImageNetPretrained/MSRA_R-50.pkl"
 DATASETS:
   TRAIN: ("my_indoor_dataset_train",)
