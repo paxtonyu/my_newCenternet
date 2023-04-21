@@ -5,8 +5,8 @@ import json
 import shutil
 
 # 需要设置的路径
-dataDir = './coco/'             #原始数据集路径
-savepath = "./coco_my/"         #保存数据集路径
+dataDir = './datasets/coco'             #原始数据集路径
+savepath = "./datasets/coco_my"         #保存数据集路径
 img_dir = savepath + 'images/'
 anno_dir = savepath + 'annotations/'
 datasets_list = ['val2017','train2017']     #待处理数据集列表
@@ -27,56 +27,6 @@ classes_unwanted = [    #不想要的数据种类
     'bear','zebra','giraffe','frisbee','skis','snowboard','sports ball','kite',
     'baseball bat','baseball glove','skateboard','surfboard','tennis racket',
 ]
-indoorCategories = [{"supercategory": "person", "id": 1, "name": "person"}, 
-                    {"supercategory": "vehicle", "id": 2, "name": "bicycle"}, 
-                    {"supercategory": "animal", "id": 17, "name": "cat"}, 
-                    {"supercategory": "animal", "id": 18, "name": "dog"}, 
-                    {"supercategory": "accessory", "id": 27, "name": "backpack"}, 
-                    {"supercategory": "accessory", "id": 28, "name": "umbrella"}, 
-                    {"supercategory": "accessory", "id": 31, "name": "handbag"}, 
-                    {"supercategory": "accessory", "id": 32, "name": "tie"}, 
-                    {"supercategory": "accessory", "id": 33, "name": "suitcase"}, 
-                    {"supercategory": "kitchen", "id": 44, "name": "bottle"}, 
-                    {"supercategory": "kitchen", "id": 46, "name": "wine glass"}, 
-                    {"supercategory": "kitchen", "id": 47, "name": "cup"}, 
-                    {"supercategory": "kitchen", "id": 48, "name": "fork"}, 
-                    {"supercategory": "kitchen", "id": 49, "name": "knife"}, 
-                    {"supercategory": "kitchen", "id": 50, "name": "spoon"}, 
-                    {"supercategory": "kitchen", "id": 51, "name": "bowl"}, 
-                    {"supercategory": "food", "id": 52, "name": "banana"}, 
-                    {"supercategory": "food", "id": 53, "name": "apple"}, 
-                    {"supercategory": "food", "id": 54, "name": "sandwich"}, 
-                    {"supercategory": "food", "id": 55, "name": "orange"}, 
-                    {"supercategory": "food", "id": 56, "name": "broccoli"}, 
-                    {"supercategory": "food", "id": 57, "name": "carrot"}, 
-                    {"supercategory": "food", "id": 58, "name": "hot dog"}, 
-                    {"supercategory": "food", "id": 59, "name": "pizza"}, 
-                    {"supercategory": "food", "id": 60, "name": "donut"}, 
-                    {"supercategory": "food", "id": 61, "name": "cake"}, 
-                    {"supercategory": "furniture", "id": 62, "name": "chair"}, 
-                    {"supercategory": "furniture", "id": 63, "name": "couch"}, 
-                    {"supercategory": "furniture", "id": 64, "name": "potted plant"}, 
-                    {"supercategory": "furniture", "id": 65, "name": "bed"}, 
-                    {"supercategory": "furniture", "id": 67, "name": "dining table"}, 
-                    {"supercategory": "furniture", "id": 70, "name": "toilet"}, 
-                    {"supercategory": "electronic", "id": 72, "name": "tv"}, 
-                    {"supercategory": "electronic", "id": 73, "name": "laptop"}, 
-                    {"supercategory": "electronic", "id": 74, "name": "mouse"}, 
-                    {"supercategory": "electronic", "id": 75, "name": "remote"}, 
-                    {"supercategory": "electronic", "id": 76, "name": "keyboard"}, 
-                    {"supercategory": "electronic", "id": 77, "name": "cell phone"}, 
-                    {"supercategory": "appliance", "id": 78, "name": "microwave"}, 
-                    {"supercategory": "appliance", "id": 79, "name": "oven"}, 
-                    {"supercategory": "appliance", "id": 80, "name": "toaster"}, 
-                    {"supercategory": "appliance", "id": 81, "name": "sink"}, 
-                    {"supercategory": "appliance", "id": 82, "name": "refrigerator"}, 
-                    {"supercategory": "indoor", "id": 84, "name": "book"}, 
-                    {"supercategory": "indoor", "id": 85, "name": "clock"}, 
-                    {"supercategory": "indoor", "id": 86, "name": "vase"}, 
-                    {"supercategory": "indoor", "id": 87, "name": "scissors"}, 
-                    {"supercategory": "indoor", "id": 88, "name": "teddy bear"}, 
-                    {"supercategory": "indoor", "id": 89, "name": "hair drier"}, 
-                    {"supercategory": "indoor", "id": 90, "name": "toothbrush"}]
 # COCO数据集的11个大类80个小类
 # 'person','backpack','umbrella','handbag','tie','suitcase',                                     #person&accessory
 # 'bicycle','car','motorcycle','airplane','bus','train','truck','boat',                          #vehicle
@@ -92,7 +42,7 @@ indoorCategories = [{"supercategory": "person", "id": 1, "name": "person"},
 # 'book','clock','vase','scissors','teddy bear','hair drier','toothbrush',                       #indoor object
 
 def cocoget(datasets):
-    json_path = '{}annotations/instances_{}.json'.format(dataDir, datasets)
+    json_path = '{}/annotations/instances_{}.json'.format(dataDir, datasets)
     json_info = json.load(open(json_path,'r'))
 
     coco=COCO(json_path)
@@ -124,16 +74,20 @@ def cocoget(datasets):
 
     images = coco.loadImgs(ids=imgIds)          
     annIds = coco.getAnnIds(imgIds=imgIds)      
-    annotations = coco.loadAnns(ids=annIds)     
-    categories = json_info['categories']
+    annotations = coco.loadAnns(ids=annIds)
+    categories = []    
+    for cat in json_info['categories']:
+        if cat['id'] not in ucatIds:
+            categories.append(cat)
+
 
     my_coco = {     #创建字典
         "images":images,
         "annotations":annotations,
-        "categories":indoorCategories,
+        "categories":categories,
     }
     my_coco_json = json.dumps(my_coco)
-    f = open(os.path.join(anno_dir+'/instances_{}.json'.format(datasets)), 'w') #保存对应json
+    f = open(os.path.join(anno_dir+'instances_{}.json'.format(datasets)), 'w') #保存对应json
     f.write(my_coco_json)
     f.close()
 
