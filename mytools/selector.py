@@ -1,8 +1,6 @@
 from pycocotools.coco import COCO
 import os
-import numpy as np
 import json
-import shutil
 
 # 需要设置的路径
 dataDir = './datasets/coco'             #原始数据集路径
