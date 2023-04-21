@@ -21,7 +21,6 @@ MODEL:
     NUM_CLS_CONVS: 1
     NUM_BOX_CONVS: 1
     REG_WEIGHT: 1.
-    MORE_POS: True
   WEIGHTS: "./models/ImageNetPretrained/MSRA_R-50.pkl"
 DATASETS:
   TRAIN: ("coco_2017_train",)
