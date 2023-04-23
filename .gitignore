@@ -11,6 +11,7 @@ inference_test_output
 *.jpg
 !/projects/DensePose/doc/images/*.jpg
 !/docs/centernet2_teaser.jpg
+!.vscode/launch.json
 
 # compilation and distribution
 __pycache__

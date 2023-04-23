@@ -1,0 +1,126 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        //Python: 当前文件
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        // "Python: demo"
+        {
+            "name": "Python: demo",
+            "type": "python",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "program": "./demo.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--config-file",
+                "./configs/CenterNet2_R50_1x.yaml",
+                "--input",
+                "./imgs/input/",
+                "--output",
+                "./imgs/output/",
+                "--opts",
+                "MODEL.WEIGHTS",
+                "./models/CenterNet2/CenterNet2_R50_1x.pth"
+            ]
+        },
+        // "name": "MY_Train_BiFPN_Debug"
+        {
+            "name": "MY_Train_BiFPN_Debug",
+            "type": "python",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "program": "./train_net.py",
+            // "program": "/home/zhangdi/zhangdi_ws/CenterNet2/train_net_balloon_my.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+                "--config-file","configs/MY_CenterNet2_DLA-ATSS-PAN-BiFPN-P37_640_16x.yaml",
+                // "--config-file","configs/CenterNet2_DLA-BiFPN-P5_640_16x.yaml",
+                // "--config-file","configs/My_CenterNet-BiFPN-P37.yaml",
+                "--resume",         //中断后继续开始训练
+                "--num-gpus","1",
+                "--start_eval_period","9999999",
+                // "--eval-only",
+                "DATASETS.TRAIN","('balloon_train',)",
+                "DATASETS.TEST","('balloon_val',)",
+                "TEST.EVAL_PERIOD","100000",
+                // "MODEL.WEIGHTS","output/output-MY-BiFPN-p37/model_0195999.pth",
+                "SOLVER.MAX_ITER","300000",
+                "SOLVER.STEPS","(60000, 180000)",
+                "SOLVER.RESET_ITER","True",
+                "SOLVER.IMS_PER_BATCH","1",
+                "OUTPUT_DIR","./output/output-Debug"
+            ]
+        },
+        // "name": "MY_COCO_Train"
+        {
+            "name": "MY_COCO_Train",
+            "type": "python",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "program": "./train_net.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                //"--config-file","./configs/CenterNet2_DLA-BiFPN-P5_640_16x.yaml",
+                //"--config-file","./configs/my_CenterNet-DLA-BiFPN-P3-CBAM.yaml",
+                //"--resume",      //中断后继续开始训练
+                //"--num-gpus","1",
+                //"--start_eval_period","2000",   //从2000开始评价 得自己写
+                //"MODEL.WEIGHTS","./models/CenterNet2/CenterNet2_DLA-BiFPN-P3_24x.pth",
+                //"MODEL.WEIGHTS","./models/CenterNet2/CenterNet-S4_DLA_8x.pth",
+                //"DATASETS.TRAIN","('my_indoor_dataset_train',)",
+                //"DATASETS.TEST","('my_indoor_dataset_val',)",
+                //#单卡训练时需将yaml中“SyncBN”改为“BN”
+                //"SOLVER.BASE_LR","0.0025",
+                //"TEST.EVAL_PERIOD","50000",     //每50000代输出一次评价结果
+                //"SOLVER.MAX_ITER","150000",     //最大迭代次数
+                //"SOLVER.STEPS", "(30000, 90000)",     //学习率衰减           
+                //"SOLVER.CHECKPOINT_PERIOD","30000",     //每30000代保存一次模型
+                //"SOLVER.RESET_ITER","True",         //不继承之前的训练
+                //"SOLVER.IMS_PER_BATCH","2",       
+                //"OUTPUT_DIR","./output/MY/auto",
+            ]
+        },
+        //"name": "MY_eval_models"
+        {
+            "name": "Eval_Models",
+            "type": "python",
+            "cwd": "${workspaceFolder}",
+            "request": "launch",
+            "program": "./train_net.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--config-file","./configs/my_CenterNet-DLA-BiFPN-P3.yaml",
+                //"--config-file","./configs/CenterNet2_DLA-BiFPN-P3_24x.yaml",
+                //"--config-file","./configs/CenterNet-S4_DLA_8x.yaml",
+                //  "--resume",
+                //"--config-file","./configs/my_train_CenterNet2_DLA-BiFPN-P3_24x.yaml",
+                "--num-gpus","1",
+                "--eval-only",
+                //"MODEL.WEIGHTS","./models/CenterNet2/CenterNet2_R50_1x.pth",
+                //"MODEL.WEIGHTS","./models/CenterNet2/CenterNet2_DLA-BiFPN-P3_24x.pth",
+                //"MODEL.WEIGHTS","output/MY/my_train_CenterNet2_DLA-BiFPN-P3_24x/model_0199999.pth",
+                //"DATASETS.TRAIN","('my_indoor_dataset_train',)",
+                //"DATASETS.TEST","('my_indoor_dataset_val',)",
+                //"SOLVER.IMS_PER_BATCH","16",    //CenterNet-S4_DLA_8x 变量统一
+                //"DATALOADER.NUM_WORKERS","4",   //CenterNet-S4_DLA_8x 变量统一
+            ]
+        }
+    ]
+}
