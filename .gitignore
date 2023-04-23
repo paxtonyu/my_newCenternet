@@ -10,7 +10,7 @@ inference_test_output
 *.diff
 *.jpg
 !/projects/DensePose/doc/images/*.jpg
-!/docs/centernet2_teaser.jpg
+!/docs/*.*
 !.vscode/launch.json
 
 # compilation and distribution
