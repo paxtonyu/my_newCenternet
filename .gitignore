@@ -1,7 +1,7 @@
 third_party/detectron2
 slurm*
 # output dir
-output
+/output/*
 instant_test_output
 inference_test_output
 
@@ -55,8 +55,9 @@ _darcs
 /datasets/lvis/*
 !/datasets/lvis/lvis_v1_train_cat_info.json
 /projects/*/datasets
-/models
+/models/*
 /snippet
 /imgs
-
+!/models/*.*
+!/output/*.*
 zhang.py
