@@ -5,6 +5,11 @@
 ## 使用nohup
 `nohup python ./train_net.py --config-file ./configs/xxx.yaml >> ./mylog/xxx.log 2>&1 &`
 
+## windows中建立软链接
+
+mklink /D "符号链接位置" "原数据位置"
+`mklink /D "D:\projects\my_newCenternet\datasets\coco" "D:\projects\datasets\coco"`
+
 ## 使用tensorboard
 `tensorboard --logdir=./output/MY/folderpath --port=6006`
 

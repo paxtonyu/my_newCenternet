@@ -76,8 +76,8 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                //"--config-file","./configs/CenterNet2_DLA-BiFPN-P5_640_16x.yaml",
-                //"--config-file","./configs/my_CenterNet-DLA-BiFPN-P3-CBAM.yaml",
+                //"--config-file","./configs/N50_my_CenterNet-DLA-BiFPN-P5-CBAM.yaml",
+                "--config-file","./configs/my_CenterNet-DLA-BiFPN-P3-CBAM.yaml",
                 //"--resume",      //中断后继续开始训练
                 //"--num-gpus","1",
                 //"--start_eval_period","2000",   //从2000开始评价 得自己写
