@@ -45,7 +45,7 @@ import time
 
 logger = logging.getLogger("detectron2")
 
-# os.environ['CUDA_VISIBLE_DEVICES'] = '0'        # 指定第一块GPU可用
+#os.environ['CUDA_VISIBLE_DEVICES'] = '1'        # 指定第一块GPU可用
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'        # 如果出现问题，CUDA debug模式，可以帮助找到问题所在，报错更详细
 
 def default_argument_parser_my(epilog=None):
@@ -237,7 +237,7 @@ def main(args):
 
 if __name__ == "__main__":
     args = default_argument_parser_my()     #不改会调用detectron里的
-    args.add_argument('--manual_device', default='')
+    args.add_argument('--manual_device', default='')    #手动指定gpu --manual_device
     args = args.parse_args()
     if args.manual_device != '':
         os.environ['CUDA_VISIBLE_DEVICES'] = args.manual_device
