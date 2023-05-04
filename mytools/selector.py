@@ -102,5 +102,5 @@ if __name__ == "__main__":
     mkr(r'{}annotations'.format(savepath))
     for datasets in datasets_list:
         cocoget(datasets)
-    print('数据集提取完成')
+    print('所有数据集均提取完成(*^_^*)')
 
