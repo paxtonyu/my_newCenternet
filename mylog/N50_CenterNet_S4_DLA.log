@@ -1,0 +1,870 @@
+nohup: 忽略输入
+Config './configs/N50_CenterNet_S4_DLA.yaml' has no VERSION. Assuming it to be compatible with latest v2.
+Command Line Args: Namespace(config_file='./configs/N50_CenterNet_S4_DLA.yaml', dist_url='tcp://127.0.0.1:58145', eval_only=False, machine_rank=0, manual_device='1', num_gpus=1, num_machines=1, opts=[], resume=False)
+[05/04 16:50:57 detectron2]: Rank of current process: 0. World size: 1
+[05/04 16:50:58 detectron2]: Environment info:
+-------------------------------  ---------------------------------------------------------------------------------------
+sys.platform                     linux
+Python                           3.8.16 (default, Mar  2 2023, 03:21:46) [GCC 11.2.0]
+numpy                            1.23.5
+detectron2                       0.6 @/home/puchyu/projects/detectron2/detectron2
+Compiler                         GCC 8.4
+CUDA compiler                    CUDA 10.2
+detectron2 arch flags            6.1
+DETECTRON2_ENV_MODULE            <not set>
+PyTorch                          1.10.0 @/home/puchyu/app/miniconda3/envs/center/lib/python3.8/site-packages/torch
+PyTorch debug build              False
+torch._C._GLIBCXX_USE_CXX11_ABI  False
+GPU available                    Yes
+GPU 0                            NVIDIA TITAN Xp (arch=6.1)
+Driver version                   470.161.03
+CUDA_HOME                        /usr/local/cuda
+Pillow                           8.3.2
+torchvision                      0.11.0 @/home/puchyu/app/miniconda3/envs/center/lib/python3.8/site-packages/torchvision
+torchvision arch flags           3.5, 5.0, 6.0, 7.0, 7.5
+fvcore                           0.1.5.post20221221
+iopath                           0.1.9
+cv2                              4.7.0
+-------------------------------  ---------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.2.3 (Git Hash 7336ca9f055cf1bfa13efb658fe15dc9b41f0740)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 10.2
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 7.6.5
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=10.2, CUDNN_VERSION=7.6.5, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.10.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, 
+
+[05/04 16:50:58 detectron2]: Command line arguments: Namespace(config_file='./configs/N50_CenterNet_S4_DLA.yaml', dist_url='tcp://127.0.0.1:58145', eval_only=False, machine_rank=0, manual_device='1', num_gpus=1, num_machines=1, opts=[], resume=False)
+[05/04 16:50:58 detectron2]: Contents of args.config_file=./configs/N50_CenterNet_S4_DLA.yaml:
+MODEL:
+  META_ARCHITECTURE: "CenterNetDetector"
+  PROPOSAL_GENERATOR:
+    NAME: "CenterNet"
+  PIXEL_STD: [57.375, 57.120, 58.395]
+  BACKBONE:
+    NAME: "build_dla_backbone"
+  DLA:
+    NORM: "BN"
+  CENTERNET:
+    NUM_CLASSES: 50
+    IN_FEATURES: ["dla2"]
+    FPN_STRIDES: [4]
+    SOI: [[0, 1000000]]
+    NUM_CLS_CONVS: 1
+    NUM_BOX_CONVS: 1
+    REG_WEIGHT: 1.
+    MORE_POS: True
+    HM_FOCAL_ALPHA: 0.25
+DATASETS:
+  TRAIN: ("my_indoor_dataset_train",)
+  TEST: ("my_indoor_dataset_val",)
+SOLVER:
+  LR_SCHEDULER_NAME: "WarmupCosineLR"
+  MAX_ITER: 90000
+  BASE_LR: 0.02
+  IMS_PER_BATCH: 16
+  WEIGHT_DECAY: 0.0001
+  CHECKPOINT_PERIOD: 10000
+  CLIP_GRADIENTS:
+    ENABLED: True
+  RESET_ITER: TRUE
+INPUT:
+  CUSTOM_AUG: EfficientDetResizeCrop
+  TRAIN_SIZE: 640
+  MIN_SIZE_TEST: 608
+  MAX_SIZE_TEST: 900
+TEST:
+  EVAL_PERIOD: 5000
+DATALOADER:
+  NUM_WORKERS: 8
+OUTPUT_DIR: "output/N50/auto"
+
+[05/04 16:50:58 detectron2]: Running with full config:
+CUDNN_BENCHMARK: false
+DATALOADER:
+  ASPECT_RATIO_GROUPING: true
+  FILTER_EMPTY_ANNOTATIONS: true
+  NUM_WORKERS: 8
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: []
+  PROPOSAL_FILES_TRAIN: []
+  TEST:
+  - my_indoor_dataset_val
+  TRAIN:
+  - my_indoor_dataset_train
+DEBUG: false
+DEBUG_SHOW_NAME: false
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: false
+    SIZE:
+    - 0.9
+    - 0.9
+    TYPE: relative_range
+  CUSTOM_AUG: EfficientDetResizeCrop
+  FORMAT: BGR
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 900
+  MAX_SIZE_TRAIN: 1333
+  MIN_SIZE_TEST: 608
+  MIN_SIZE_TRAIN:
+  - 800
+  MIN_SIZE_TRAIN_SAMPLING: choice
+  NOT_CLAMP_BOX: false
+  RANDOM_FLIP: horizontal
+  SCALE_RANGE:
+  - 0.1
+  - 2.0
+  TEST_INPUT_TYPE: default
+  TEST_SIZE: 640
+  TRAIN_SIZE: 640
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES:
+    - - -90
+      - 0
+      - 90
+    ASPECT_RATIOS:
+    - - 0.5
+      - 1.0
+      - 2.0
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES:
+    - - 32
+      - 64
+      - 128
+      - 256
+      - 512
+  BACKBONE:
+    FREEZE_AT: 2
+    NAME: build_dla_backbone
+  BIFPN:
+    NORM: GN
+    NUM_BIFPN: 6
+    NUM_LEVELS: 5
+    OUT_CHANNELS: 160
+    SEPARABLE_CONV: false
+  CENTERNET:
+    AS_PROPOSAL: false
+    CENTER_NMS: false
+    FPN_STRIDES:
+    - 4
+    HM_FOCAL_ALPHA: 0.25
+    HM_FOCAL_BETA: 4
+    HM_MIN_OVERLAP: 0.8
+    IGNORE_HIGH_FP: -1.0
+    INFERENCE_TH: 0.05
+    IN_FEATURES:
+    - dla2
+    LOC_LOSS_TYPE: giou
+    LOSS_GAMMA: 2.0
+    MIN_RADIUS: 4
+    MORE_POS: true
+    MORE_POS_THRESH: 0.2
+    MORE_POS_TOPK: 9
+    NEG_WEIGHT: 1.0
+    NMS_TH_TEST: 0.6
+    NMS_TH_TRAIN: 0.6
+    NORM: GN
+    NOT_NMS: false
+    NOT_NORM_REG: true
+    NO_REDUCE: false
+    NUM_BOX_CONVS: 1
+    NUM_CLASSES: 50
+    NUM_CLS_CONVS: 1
+    NUM_SHARE_CONVS: 0
+    ONLY_PROPOSAL: false
+    POST_NMS_TOPK_TEST: 100
+    POST_NMS_TOPK_TRAIN: 100
+    POS_WEIGHT: 1.0
+    PRE_NMS_TOPK_TEST: 1000
+    PRE_NMS_TOPK_TRAIN: 1000
+    PRIOR_PROB: 0.01
+    REG_WEIGHT: 1.0
+    SIGMOID_CLAMP: 0.0001
+    SOI:
+    - - 0
+      - 1000000
+    USE_DEFORMABLE: false
+    WITH_AGN_HM: false
+  DEVICE: cuda
+  DLA:
+    DLAUP_IN_FEATURES:
+    - dla3
+    - dla4
+    - dla5
+    DLAUP_NODE: conv
+    MS_OUTPUT: false
+    NORM: BN
+    NUM_LAYERS: 34
+    OUT_FEATURES:
+    - dla2
+    USE_DLA_UP: true
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: []
+    NORM: ''
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: false
+  LOAD_PROPOSALS: false
+  MASK_ON: false
+  META_ARCHITECTURE: CenterNetDetector
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: true
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN:
+  - 103.53
+  - 116.28
+  - 123.675
+  PIXEL_STD:
+  - 57.375
+  - 57.12
+  - 58.395
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: CenterNet
+  RESNETS:
+    DEFORM_MODULATED: false
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE:
+    - false
+    - false
+    - false
+    - false
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES:
+    - res4
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: true
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_WEIGHTS: &id002
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES:
+    - p3
+    - p4
+    - p5
+    - p6
+    - p7
+    IOU_LABELS:
+    - 0
+    - -1
+    - 1
+    IOU_THRESHOLDS:
+    - 0.4
+    - 0.5
+    NMS_THRESH_TEST: 0.5
+    NORM: ''
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS:
+    - &id001
+      - 10.0
+      - 10.0
+      - 5.0
+      - 5.0
+    - - 20.0
+      - 20.0
+      - 10.0
+      - 10.0
+    - - 30.0
+      - 30.0
+      - 15.0
+      - 15.0
+    IOUS:
+    - 0.5
+    - 0.6
+    - 0.7
+  ROI_BOX_HEAD:
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: *id001
+    CAT_FREQ_PATH: datasets/lvis/lvis_v1_train_cat_info.json
+    CLS_AGNOSTIC_BBOX_REG: false
+    CONV_DIM: 256
+    EQL_FREQ_CAT: 200
+    FC_DIM: 1024
+    FED_LOSS_FREQ_WEIGHT: 0.5
+    FED_LOSS_FREQ_WEIGHT_POWER: 0.5
+    FED_LOSS_NUM_CAT: 50
+    FED_LOSS_NUM_CLASSES: 50
+    MULT_PROPOSAL_SCORE: false
+    NAME: ''
+    NORM: ''
+    NUM_CONV: 0
+    NUM_FC: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+    PRIOR_PROB: 0.01
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: false
+    USE_EQL_LOSS: false
+    USE_FED_LOSS: false
+    USE_SIGMOID_CE: false
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 512
+    IN_FEATURES:
+    - res4
+    IOU_LABELS:
+    - 0
+    - 1
+    IOU_THRESHOLDS:
+    - 0.5
+    NAME: Res5ROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: true
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS:
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    - 512
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: true
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: false
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: ''
+    NUM_CONV: 0
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_LOSS_TYPE: smooth_l1
+    BBOX_REG_LOSS_WEIGHT: 1.0
+    BBOX_REG_WEIGHTS: *id002
+    BOUNDARY_THRESH: -1
+    CONV_DIMS:
+    - -1
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES:
+    - res4
+    IOU_LABELS:
+    - 0
+    - -1
+    - 1
+    IOU_THRESHOLDS:
+    - 0.3
+    - 0.7
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 1000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 6000
+    PRE_NMS_TOPK_TRAIN: 12000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES:
+    - p2
+    - p3
+    - p4
+    - p5
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 54
+  WEIGHTS: ''
+OUTPUT_DIR: output/N50/N50_CenterNet_S4_DLA
+SAVE_DEBUG: false
+SAVE_PTH: false
+SEED: -1
+SOLVER:
+  AMP:
+    ENABLED: false
+  BASE_LR: 0.02
+  BASE_LR_END: 0.0
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 10000
+  CLIP_GRADIENTS:
+    CLIP_TYPE: value
+    CLIP_VALUE: 1.0
+    ENABLED: true
+    NORM_TYPE: 2.0
+  GAMMA: 0.1
+  IMS_PER_BATCH: 16
+  LR_SCHEDULER_NAME: WarmupCosineLR
+  MAX_ITER: 90000
+  MOMENTUM: 0.9
+  NESTEROV: false
+  NUM_DECAYS: 3
+  REFERENCE_WORLD_SIZE: 0
+  RESCALE_INTERVAL: false
+  RESET_ITER: true
+  STEPS:
+  - 30000
+  TRAIN_ITER: -1
+  WARMUP_FACTOR: 0.001
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: null
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: false
+    FLIP: true
+    MAX_SIZE: 4000
+    MIN_SIZES:
+    - 400
+    - 500
+    - 600
+    - 700
+    - 800
+    - 900
+    - 1000
+    - 1100
+    - 1200
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 5000
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: false
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
+VIS_THRESH: 0.3
+
+[05/04 16:50:58 detectron2]: Full config saved to output/N50/N50_CenterNet_S4_DLA/config.yaml
+[05/04 16:50:58 d2.utils.env]: Using a generated random seed 60185937
+Loading pretrained
+[05/04 16:51:01 detectron2]: Model:
+CenterNetDetector(
+  (backbone): DLASeg(
+    (base): DLA(
+      (base_layer): Sequential(
+        (0): Conv2d(3, 16, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level0): Sequential(
+        (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level1): Sequential(
+        (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (level2): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level3): Tree(
+        (tree1): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (project): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (tree2): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level4): Tree(
+        (tree1): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (project): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (tree2): Tree(
+          (tree1): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (tree2): BasicBlock(
+            (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (root): Root(
+            (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (level5): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(1280, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (fc): Conv2d(512, 1000, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (dla_up): DLAUp(
+      (ida_0): IDAUp(
+        (proj_1): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(512, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=512, out_channels=256, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (up_1): ConvTranspose2d(256, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=256, bias=False)
+        (node_1): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=256, out_channels=256, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+      )
+      (ida_1): IDAUp(
+        (proj_1): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=256, out_channels=128, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (up_1): ConvTranspose2d(128, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+        (node_1): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (proj_2): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=256, out_channels=128, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (up_2): ConvTranspose2d(128, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+        (node_2): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=128, out_channels=128, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+      )
+      (ida_2): IDAUp(
+        (proj_1): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=128, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (up_1): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+        (node_1): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=64, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (proj_2): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=128, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (up_2): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+        (node_2): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=64, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (proj_3): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=128, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+        (up_3): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+        (node_3): _DeformConv(
+          (actf): Sequential(
+            (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (1): ReLU(inplace=True)
+          )
+          (offset): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (conv): ModulatedDeformConv(in_channels=64, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+        )
+      )
+    )
+    (ida_up): IDAUp(
+      (proj_1): _DeformConv(
+        (actf): Sequential(
+          (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (offset): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv): ModulatedDeformConv(in_channels=128, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+      )
+      (up_1): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+      (node_1): _DeformConv(
+        (actf): Sequential(
+          (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (offset): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv): ModulatedDeformConv(in_channels=64, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+      )
+      (proj_2): _DeformConv(
+        (actf): Sequential(
+          (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (offset): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv): ModulatedDeformConv(in_channels=256, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+      )
+      (up_2): ConvTranspose2d(64, 64, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2), groups=64, bias=False)
+      (node_2): _DeformConv(
+        (actf): Sequential(
+          (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (offset): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (conv): ModulatedDeformConv(in_channels=64, out_channels=64, kernel_size=(3, 3), stride=1, padding=1, dilation=1, groups=1, deformable_groups=1, bias=True)
+      )
+    )
+  )
+  (proposal_generator): CenterNet(
+    (iou_loss): IOULoss()
+    (centernet_head): CenterNetHead(
+      (cls_tower): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): GroupNorm(32, 64, eps=1e-05, affine=True)
+        (2): ReLU()
+      )
+      (bbox_tower): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): GroupNorm(32, 64, eps=1e-05, affine=True)
+        (2): ReLU()
+      )
+      (share_tower): Sequential()
+      (bbox_pred): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (scales): ModuleList(
+        (0): Scale()
+      )
+      (cls_logits): Conv2d(64, 50, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)
+[05/04 16:51:01 d2.checkpoint.detection_checkpoint]: [DetectionCheckpointer] Loading from  ...
+[05/04 16:51:01 fvcore.common.checkpoint]: No checkpoint found. Initializing model from scratch
+[05/04 16:51:01 detectron2]: Reset loaded iteration. Start training from iteration 0.
+[05/04 16:51:01 d2.data.dataset_mapper]: [DatasetMapper] Augmentations used in training: [<centernet.data.transforms.custom_augmentation_impl.EfficientDetResizeCrop object at 0x7f7061a2d5e0>, RandomFlip()]
+[05/04 16:51:10 d2.data.datasets.coco]: Loading datasets/coco_my/annotations/my_instances_train2017.json takes 9.11 seconds.
+WARNING [05/04 16:51:10 d2.data.datasets.coco]: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/04 16:51:11 d2.data.datasets.coco]: Loaded 52489 images in COCO format from datasets/coco_my/annotations/my_instances_train2017.json
+[05/04 16:51:14 d2.data.build]: Removed 1021 images with no usable annotations. 51468 images left.
+[05/04 16:51:16 d2.data.build]: Distribution of instances among all 50 categories:
+|   category   | #instances   |   category   | #instances   |  category  | #instances   |
+|:------------:|:-------------|:------------:|:-------------|:----------:|:-------------|
+|    person    | 66814        |   bicycle    | 1473         |    cat     | 4184         |
+|     dog      | 2823         |   backpack   | 2574         |  umbrella  | 5447         |
+|   handbag    | 4716         |     tie      | 4832         |  suitcase  | 4056         |
+|    bottle    | 21532        |  wine glass  | 7449         |    cup     | 18861        |
+|     fork     | 5178         |    knife     | 7489         |   spoon    | 5900         |
+|     bowl     | 13511        |    banana    | 7801         |   apple    | 5178         |
+|   sandwich   | 4148         |    orange    | 5885         |  broccoli  | 7164         |
+|    carrot    | 7515         |   hot dog    | 2623         |   pizza    | 5513         |
+|    donut     | 6591         |     cake     | 5958         |   chair    | 24736        |
+|    couch     | 5455         | potted plant | 5730         |    bed     | 4037         |
+| dining table | 13671        |    toilet    | 4047         |     tv     | 5388         |
+|    laptop    | 4703         |    mouse     | 2188         |   remote   | 5566         |
+|   keyboard   | 2746         |  cell phone  | 4997         | microwave  | 1629         |
+|     oven     | 3254         |   toaster    | 220          |    sink    | 5516         |
+| refrigerator | 2516         |     book     | 22430        |   clock    | 4726         |
+|     vase     | 6204         |   scissors   | 1393         | teddy bear | 4133         |
+|  hair drier  | 190          |  toothbrush  | 1900         |            |              |
+|    total     | 372590       |              |              |            |              |
+[05/04 16:51:16 d2.data.build]: Using training sampler TrainingSampler
+[05/04 16:51:16 d2.data.common]: Serializing the dataset using: <class 'detectron2.data.common._TorchSerializedList'>
+[05/04 16:51:16 d2.data.common]: Serializing 51468 elements to byte tensors and concatenating them all ...
+[05/04 16:51:18 d2.data.common]: Serialized dataset takes 175.45 MiB
+[05/04 16:51:18 detectron2]: Starting training from iteration 0
+[05/04 16:52:30 d2.utils.events]:  eta: 3 days, 16:01:33  iter: 20  total_loss: 2.041  loss_centernet_pos: 1.105  loss_centernet_neg: 0.1522  loss_centernet_loc: 0.7838    time: 3.4696  last_time: 3.4122  data_time: 0.1084  last_data_time: 0.1696   lr: 0.0003995  max_mem: 10244M

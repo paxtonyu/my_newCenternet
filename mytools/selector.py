@@ -3,8 +3,8 @@ import os
 import json
 
 # 需要设置的路径
-dataDir = './datasets/coco'             #原始数据集路径
-savepath = "./datasets/coco_my"         #保存数据集路径
+dataDir = './datasets/coco/'             #原始数据集路径
+savepath = "./datasets/coco_my/"         #保存数据集路径
 img_dir = savepath + 'images/'
 anno_dir = savepath + 'annotations/'
 datasets_list = ['val2017','train2017']     #待处理数据集列表
@@ -40,7 +40,7 @@ classes_unwanted = [    #不想要的数据种类
 # 'book','clock','vase','scissors','teddy bear','hair drier','toothbrush',                       #indoor object
 
 def cocoget(datasets):
-    json_path = '{}/annotations/instances_{}.json'.format(dataDir, datasets)
+    json_path = '{}annotations/instances_{}.json'.format(dataDir, datasets)
     json_info = json.load(open(json_path,'r'))
 
     coco=COCO(json_path)
@@ -59,7 +59,7 @@ def cocoget(datasets):
     for id in uimgIds:
         imgIds.remove(id)                   #得到剩下想要的imgIds
     
-    mkr(r'{}/{}'.format(savepath, datasets))    #创建保存路径
+    mkr(r'{}{}'.format(savepath, datasets))    #创建保存路径
     
     #   只需要有原COCO数据集搭配json文件即可，无需移动图片
     # for id in imgIds:
@@ -85,7 +85,7 @@ def cocoget(datasets):
         "categories":categories,
     }
     my_coco_json = json.dumps(my_coco)
-    f = open(os.path.join(anno_dir+'instances_{}.json'.format(datasets)), 'w') #保存对应json
+    f = open(os.path.join(anno_dir+'my_instances_{}.json'.format(datasets)), 'w') #保存对应json
     f.write(my_coco_json)
     f.close()
 

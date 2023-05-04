@@ -3,7 +3,8 @@
 基于centernet补充添加Attention和MSF
 
 ## 使用nohup
-`nohup python ./train_net.py --config-file ./configs/xxx.yaml >> ./mylog/xxx.log 2>&1 &`
+`nohup python ./train_net.py --config-file ./configs/xxx.yaml --manual_device 1 >> ./mylog/xxx.log 2>&1 &`
+device指定第几块GPU
 
 ## windows中建立软链接
 
