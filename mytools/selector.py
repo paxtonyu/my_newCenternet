@@ -95,7 +95,7 @@ def mkr(path):
         # os.mkdir(path)
         pass
     else:
-        os.mkdir(path)
+        os.makedirs(path)       #单级目录使用mkdir，多级目录使用makedirs
 
 if __name__ == "__main__":
     mkr(r'{}annotations'.format(savepath))
