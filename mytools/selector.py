@@ -98,7 +98,7 @@ def mkr(path):
         os.mkdir(path)
 
 if __name__ == "__main__":
-    mkr(r'{}/annotations'.format(savepath))
+    mkr(r'{}annotations'.format(savepath))
     for datasets in datasets_list:
         cocoget(datasets)
     print('数据集提取完成')
