@@ -6,6 +6,9 @@
 `nohup python ./train_net.py --config-file ./configs/xxx.yaml --manual_device 1 >> ./mylog/xxx.log 2>&1 &`
 device指定第几块GPU
 
+## 查看进程树 GPU实时监控
+`pstree -aup | grep python` `watch nvidia-smi`
+
 ## windows中建立软链接
 
 mklink /D "符号链接位置" "原数据位置"
