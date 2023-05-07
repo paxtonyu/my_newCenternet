@@ -42,9 +42,9 @@ classes_unwanted = [    #不想要的数据种类
 def cocoget(datasets):
     json_path = '{}annotations/instances_{}.json'.format(dataDir, datasets)
     json_info = json.load(open(json_path,'r'))
-
+    print('读取{}中...'.format(datasets))
     coco=COCO(json_path)
-
+    print('json读取完成,开始提取文件标注...')
     imgIds=coco.getImgIds()     #所有图片id
 
     ucatIds = coco.getCatIds(catNms=classes_unwanted)   #不需要的类别
@@ -69,7 +69,7 @@ def cocoget(datasets):
     #     shutil.copy(img_path,save_path)             #复制到保存路径中
     #     print(img_path)
 
-
+    print('开始保存json文件...')
     images = coco.loadImgs(ids=imgIds)          
     annIds = coco.getAnnIds(imgIds=imgIds)      
     annotations = coco.loadAnns(ids=annIds)
@@ -88,6 +88,7 @@ def cocoget(datasets):
     f = open(os.path.join(anno_dir+'my_instances_{}.json'.format(datasets)), 'w') #保存对应json
     f.write(my_coco_json)
     f.close()
+    print('{}保存完成'.format(datasets))
 
 def mkr(path):
     if os.path.exists(path):
@@ -95,11 +96,11 @@ def mkr(path):
         # os.mkdir(path)
         pass
     else:
-        os.mkdir(path)
+        os.makedirs(path)       #单级目录使用mkdir，多级目录使用makedirs
 
 if __name__ == "__main__":
-    mkr(r'{}/annotations'.format(savepath))
+    mkr(r'{}annotations'.format(savepath))
     for datasets in datasets_list:
         cocoget(datasets)
-    print('数据集提取完成')
+    print('所有数据集均提取完成(*^_^*)')
 
