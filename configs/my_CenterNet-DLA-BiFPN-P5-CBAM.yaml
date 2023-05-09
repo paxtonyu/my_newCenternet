@@ -23,18 +23,18 @@ MODEL:
     REG_WEIGHT: 1.
     MORE_POS: True
     HM_FOCAL_ALPHA: 0.25
-  WEIGHTS: "./models/ImageNetPretrained/MSRA_R-50.pkl"
+  WEIGHTS: "./models/CenterNet/my_CenterNet-DLA-BiFPN-P5-CBAM.pth"
 DATASETS:
   TRAIN: ("coco_2017_train",)
   TEST: ("coco_2017_val",)
 SOLVER:
 SOLVER:
   LR_SCHEDULER_NAME: "WarmupCosineLR"
-  MAX_ITER: 520000
-  BASE_LR: 0.04
-  IMS_PER_BATCH: 8
+  MAX_ITER: 90000
+  BASE_LR: 0.01
+  IMS_PER_BATCH: 16
   WEIGHT_DECAY: 0.0001
-  CHECKPOINT_PERIOD: 100000
+  CHECKPOINT_PERIOD: 50000
   CLIP_GRADIENTS:
     ENABLED: True
   RESET_ITER: TRUE
@@ -47,4 +47,4 @@ TEST:
   EVAL_PERIOD: 5000
 DATALOADER:
   NUM_WORKERS: 8
-OUTPUT_DIR: "./output/MY/CBAM/auto"
+OUTPUT_DIR: "./output/MY/finetune/auto"

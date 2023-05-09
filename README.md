@@ -9,15 +9,15 @@ device指定第几块GPU
 ## 查看进程树 GPU实时监控
 `pstree -aup | grep python` `watch nvidia-smi`
 
+## 使用tensorboard
+`tensorboard --logdir=./output/MY/folderpath --port=6006`
+
 ## windows中建立软链接
 
 mklink /D "符号链接位置" "原数据位置"
 `mklink /D "D:\projects\my_newCenternet\datasets\coco" "D:\projects\datasets\coco"`
 `mklink /D "D:\projects\my_newCenternet\datasets\coco_my\train2017" "D:\projects\datasets\coco\train2017"`
 `mklink /D "D:\projects\my_newCenternet\datasets\coco_my\val2017" "D:\projects\datasets\coco\val2017"`
-
-## 使用tensorboard
-`tensorboard --logdir=./output/MY/folderpath --port=6006`
 
 ## git push失败
 
