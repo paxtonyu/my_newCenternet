@@ -24,3 +24,21 @@ L_k=\frac{-1}{N}\sum_{xyc}
      y=(\hat{Y_{xyc}})^\alpha (1-Y_{xyc})^\beta log(1-\hat{Y_{xyc}}) & \ \ \quad 其它
 \end{cases}
 $$
+
+$$
+Y_{x y c}\implies\exp\Big(-\frac{(x-\tilde{p}_{x})^{2}+(y-\tilde{p}_{y})^{2}}{2\sigma_{p}^{2}}\Big)
+$$
+
+$$
+p_k=\left({\frac{x_{1}^{(k)}+x_{2}^{(k)}}{2}},\;{\frac{y_{1}^{(k)}+y_{2}^{(k)}}{2}}\right)
+$$
+
+$$
+s_k=(x_{2}^{(k)}-x_{1}^{(k)},y_{2}^{(k)}-y_{1}^{(k)})
+$$
+$$
+L_{size}=\sum_{k=1}^{N}\left | \hat{S}_{pk} -s_k \right | 
+$$
+$$
+L_{off}=\frac{1}{N} \sum_{p} \left | \hat{O}_p -(\frac{p}{R} - p) \right |
+$$
