@@ -77,8 +77,8 @@
             "justMyCode": false,
             "args": [
                 //"--config-file","./configs/N50_my_CenterNet-DLA-BiFPN-P5-CBAM.yaml",
-                "--config-file","./configs/N50_CenterNet_S4_DLA.yaml",
-                "--manual_device","1",
+                "--config-file","./configs/nurse.yaml",
+                "--manual_device","1",  //gpu编号
                 //"--resume",      //中断后继续开始训练
                 //"--num-gpus","1",
                 //"--start_eval_period","2000",   //从2000开始评价 得自己写
@@ -107,12 +107,12 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--config-file","./configs/my_CenterNet-DLA-BiFPN-P3.yaml",
+                "--config-file","./configs/CenterNet-FPN-R50_1x.yaml",
                 //"--config-file","./configs/CenterNet2_DLA-BiFPN-P3_24x.yaml",
                 //"--config-file","./configs/CenterNet-S4_DLA_8x.yaml",
                 //  "--resume",
                 //"--config-file","./configs/my_train_CenterNet2_DLA-BiFPN-P3_24x.yaml",
-                "--num-gpus","1",
+                //"--num-gpus","1",
                 "--eval-only",
                 //"MODEL.WEIGHTS","./models/CenterNet2/CenterNet2_R50_1x.pth",
                 //"MODEL.WEIGHTS","./models/CenterNet2/CenterNet2_DLA-BiFPN-P3_24x.pth",

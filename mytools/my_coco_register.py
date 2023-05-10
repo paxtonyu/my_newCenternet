@@ -12,3 +12,7 @@ coco_50 = ['person','backpack','umbrella','handbag','tie','suitcase',
 def register_my_coco():
     register_coco_instances("my_indoor_dataset_train", {}, "datasets/coco_my/annotations/my_instances_train2017.json", "datasets/coco_my/train2017")
     register_coco_instances("my_indoor_dataset_val", {}, "datasets/coco_my/annotations/my_instances_val2017.json", "datasets/coco_my/val2017")
+    register_coco_instances("rebar_train", {}, "datasets/rebar/annotations/train.json", "datasets/rebar/images/train_data")
+    register_coco_instances("rebar_val", {}, "datasets/rebar/annotations/val.json", "datasets/rebar/images/val_data")
+    register_coco_instances("nurse_train", {}, "datasets/nurse6/annotations/train.json", "datasets/nurse6/train")
+    register_coco_instances("nurse_val", {}, "datasets/nurse6/annotations/val.json", "datasets/nurse6/val")
