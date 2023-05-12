@@ -1,6 +1,12 @@
-# Indoor object detection based on multi-scale feature fusion and attention mechanism
+# 基于多尺度特征融合和注意力机制的室内目标检测
 
-基于centernet补充添加Attention和MSF
+### Indoor Object Detection Based on Multi-scale Feature Fusion and Attention Mechanism
+---
+基于centernet补充添加Attention和MSFF
+
+## CenterNet-FFA
+
+![](docs/CenterNet-FFA.png)
 
 ## 使用nohup
 `nohup python ./train_net.py --config-file ./configs/xxx.yaml --manual_device 1 >> ./mylog/xxx.log 2>&1 &`
@@ -18,11 +24,6 @@ mklink /D "符号链接位置" "原数据位置"
 `mklink /D "D:\projects\my_newCenternet\datasets\coco" "D:\projects\datasets\coco"`
 `mklink /D "D:\projects\my_newCenternet\datasets\coco_my\train2017" "D:\projects\datasets\coco\train2017"`
 `mklink /D "D:\projects\my_newCenternet\datasets\coco_my\val2017" "D:\projects\datasets\coco\val2017"`
-
-## git push失败
-
-报错 `gnutls_handshake() failed: The TLS connection was non-properly terminated.`
-使用 `git config --global http.sslverify false`
 
 # Objects as Points
 Object detection, 3D detection, and pose estimation using center point detection:
