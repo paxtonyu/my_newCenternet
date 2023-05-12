@@ -61,4 +61,4 @@ _darcs
 !/models/*.*
 !/output/*.*
 zhang.py
-/mylog/*.log
+/mylog/*
