@@ -62,3 +62,7 @@ _darcs
 !/output/*.*
 zhang.py
 /mylog/*
+/configs/*
+!/configs/CenterNet-FFA_N80.yaml
+!/configs/CenterNet-FFA_N50.yaml
+!/configs/CenterNet-FFA_nurse.yaml

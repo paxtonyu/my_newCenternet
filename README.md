@@ -2,7 +2,7 @@
 
 ### Indoor Object Detection Based on Multi-scale Feature Fusion and Attention Mechanism
 ---
-基于centernet补充添加Attention和MSFF
+基于Feature Fusion和Attention改进centernet
 
 ## CenterNet-FFA
 
@@ -22,8 +22,6 @@ device指定第几块GPU
 
 mklink /D "符号链接位置" "原数据位置"
 `mklink /D "D:\projects\my_newCenternet\datasets\coco" "D:\projects\datasets\coco"`
-`mklink /D "D:\projects\my_newCenternet\datasets\coco_my\train2017" "D:\projects\datasets\coco\train2017"`
-`mklink /D "D:\projects\my_newCenternet\datasets\coco_my\val2017" "D:\projects\datasets\coco\val2017"`
 
 # Objects as Points
 Object detection, 3D detection, and pose estimation using center point detection:
