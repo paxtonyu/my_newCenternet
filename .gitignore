@@ -61,4 +61,8 @@ _darcs
 !/models/*.*
 !/output/*.*
 zhang.py
+<<<<<<< HEAD
 /mylog/*
+=======
+/mylog/*.log
+>>>>>>> 2c19d12356c851e53e44bbcfdad0ca87c774876b

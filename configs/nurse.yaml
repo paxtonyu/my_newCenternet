@@ -1,5 +1,4 @@
 MODEL:
-  WEIGHT: "output/MY/nurse/model_20000.pth"
   META_ARCHITECTURE: "CenterNetDetector"
   PROPOSAL_GENERATOR:
     NAME: "CenterNet"
