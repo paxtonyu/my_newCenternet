@@ -16,7 +16,7 @@ device指定第几块GPU
 `pstree -aup | grep python` `watch nvidia-smi`
 
 ## 使用tensorboard
-`tensorboard --logdir=./output/MY/folderpath --port=6006`
+`tensorboard --logdir=./output/ --port=6008`
 
 ## windows中建立软链接
 
