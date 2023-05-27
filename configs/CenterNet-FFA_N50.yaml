@@ -19,7 +19,7 @@ MODEL:
     SOI: [[0, 64], [48, 192], [128, 1000000]]
     NUM_CLASSES: 50
     IN_FEATURES: ['p3', 'p4', 'p5']
-  WEIGHTS: "./models/ImageNetPretrained/MSRA_R-50.pkl"
+  WEIGHTS: "./models/CenterNet/CenterNet-FFA_N50.pth"
 DATASETS:
   TRAIN: ("my_indoor_dataset_train",)
   TEST: ("my_indoor_dataset_val",)

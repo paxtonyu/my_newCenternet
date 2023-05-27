@@ -23,7 +23,7 @@ MODEL:
     REG_WEIGHT: 1.
     MORE_POS: True
     HM_FOCAL_ALPHA: 0.25
-  WEIGHTS: "./output/MY/finetune/my_CenterNet-DLA-BiFPN-P5-CBAM/model_90000.pth"
+  WEIGHTS: "./models/CenterNet/CenterNet-FFA_N80.pth"
 DATASETS:
   TRAIN: ("coco_2017_train",)
   TEST: ("coco_2017_val",)
