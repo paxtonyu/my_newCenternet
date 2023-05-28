@@ -108,7 +108,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--config-file","./configs/CenterNet-FFA_N80.pth.yaml",
+                "--config-file","./configs/CenterNet-FFA_N80.yaml",
                 //"--config-file","./configs/CenterNet2_DLA-BiFPN-P3_24x.yaml",
                 //"--config-file","./configs/CenterNet-S4_DLA_8x.yaml",
                 //  "--resume",
