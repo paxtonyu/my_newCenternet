@@ -24,14 +24,16 @@
             "justMyCode": false,
             "args": [
                 "--config-file",
-                "./configs/nurse.yaml",
-                "--input",
-                "./imgs/input/",
+                "./configs/CenterNet-FFA_N80.yaml",
+                "--video-input",
+                "./imgs/honkai_impact.mp4",
+                //"--input",
+                //"./imgs/input/",
                 "--output",
-                "./imgs/output/",
-                "--opts",
-                "MODEL.WEIGHTS",
-                "./models/CenterNet/nurse.pth"
+                "./imgs/",
+                //"--opts",
+                //"MODEL.WEIGHTS",
+                //"./models/CenterNet/nurse.pth"
             ]
         },
         // "name": "MY_Train_BiFPN_Debug"
